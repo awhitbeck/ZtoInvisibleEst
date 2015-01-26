@@ -13,7 +13,7 @@ struct cut{
 
 };
 
-void simple(){
+void ZnunuYields(){
 	
 	TChain* ZJets400 = new TChain("TreeFiller/AnalysisTree");
 	ZJets400->Add("rootFiles_13TeV_25ns20PU/13TeV_25ns20PU.ZJetsToNuNu_HT-400to600_Tune4C_13TeV-madgraph-tauola*");

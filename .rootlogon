@@ -1,0 +1,8 @@
+{
+
+gSystem->ProcessLine(".L ~/tdrstyle.C");
+gSystem->ProcessLine("setTDRStyle());
+gSystem->ProcessLine(".L photon.cc+");
+
+
+}
