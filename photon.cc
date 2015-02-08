@@ -105,10 +105,12 @@ public:
       return false;
     }
 
-    if( fabs( genPhoton.Eta() ) < 2.5 ) return true;
+    if( fabs( genPhoton.Eta() ) > 2.5 ) 
+      cout << "genPhoton.Eta(): " << genPhoton.Eta() << endl; 
+    
+    if( fabs( genPhoton.Eta() ) < 1.4442 || ( fabs( genPhoton.Eta() ) > 1.566 && fabs( genPhoton.Eta() ) < 2.5 ) ) return true;
     else return false;
     
-
   };
   
   bool passID( unsigned int iPh ){
@@ -136,14 +138,14 @@ public:
     if( isEB->at(iPh) ){
       
       if( pfChargedIsoRhoCorr->at(iPh) > 0.7 ) return false;
-      if( pfNeutralIsoRhoCorr->at(iPh) > 0.4 + 0.04*fourVec->at(iPh).Pt() ) return false;
-      if( pfGammaIsoRhoCorr->at(iPh) > 0.5 + 0.005*fourVec->at(iPh).Pt() ) return false;
+      if( pfNeutralIsoRhoCorr->at(iPh) > (0.4 + 0.04*fourVec->at(iPh).Pt()) ) return false;
+      if( pfGammaIsoRhoCorr->at(iPh) > (0.5 + 0.005*fourVec->at(iPh).Pt()) ) return false;
       
     }else{
       
       if( pfChargedIsoRhoCorr->at(iPh) > 0.5 ) return false;
-      if( pfNeutralIsoRhoCorr->at(iPh) > 1.5 + 0.04*fourVec->at(iPh).Pt() ) return false;
-      if( pfGammaIsoRhoCorr->at(iPh) > 1.0 + 0.005*fourVec->at(iPh).Pt() ) return false;
+      if( pfNeutralIsoRhoCorr->at(iPh) > (1.5 + 0.04*fourVec->at(iPh).Pt()) ) return false;
+      if( pfGammaIsoRhoCorr->at(iPh) > (1.0 + 0.005*fourVec->at(iPh).Pt()) ) return false;
       
     }
 
@@ -217,8 +219,8 @@ public:
     getPhotonsFromEvent( iEvent );
 
     double chIso = effAreas->rhoCorrectedIso( pfCh , pfChargedIso->at(iPhoton) , fourVec->at(iPhoton).Eta() , rho );
-    double nuIso = effAreas->rhoCorrectedIso( pfNu , pfChargedIso->at(iPhoton) , fourVec->at(iPhoton).Eta() , rho );
-    double gamIso = effAreas->rhoCorrectedIso( pfGam , pfChargedIso->at(iPhoton) , fourVec->at(iPhoton).Eta() , rho );
+    double nuIso = effAreas->rhoCorrectedIso( pfNu , pfNeutralIso->at(iPhoton) , fourVec->at(iPhoton).Eta() , rho );
+    double gamIso = effAreas->rhoCorrectedIso( pfGam , pfGammaIso->at(iPhoton) , fourVec->at(iPhoton).Eta() , rho );
 
     if( isEB ){
 		
