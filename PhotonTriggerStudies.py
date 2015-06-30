@@ -46,7 +46,7 @@ for iEvt in range( nEvents ) :
 
     if bestPhotonIndex == -1 : continue
     if deltaPhi1 < 0.5 or deltaPhi2 < 0.5 or deltaPhi3 < 0.3 : continue
-    if MHTclean < 200. : continue
+    #if MHTclean < 200. : continue
 
     ### in current configuration bit 14 is the relative
     if triggerBit[14] : #and MHTclean > 200. and NJetsclean > 3 ) :             
